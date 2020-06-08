@@ -6,6 +6,7 @@ close all
 % 1-5,6-8
 % namespace={'e40+10.csv','e60+20.csv','e100+20.csv','e60+40.csv','e70+45.csv' ...
 %     ,'tmp02.csv','pp_he_01.csv','pp_test1.csv'};
+namespace = 'pp_he_01.csv';
 namespace = 'demio_purepursuit.csv'
 %%
 data0=csvread(namespace);

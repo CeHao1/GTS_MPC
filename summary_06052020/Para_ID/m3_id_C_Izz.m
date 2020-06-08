@@ -1,13 +1,16 @@
 close all
 
+% relatively 40+20*sin(0.01t) on centerline
+
+
 % identify C and Izz, please set Izz in m4 as the result of m3
 
 %% C
 % method1
 cvx_begin
-variable C
-J=ay*m/2-C*(saf+sar)
-minimize(norm(J))
+    variable C
+    J=ay*m/2-C*(saf+sar)
+    minimize(norm(J))
 cvx_end
 
 % method2
@@ -33,9 +36,9 @@ yy=C*L*(saf-sar)-ay*m*(lr-lf)/2;
 % yy=(b1c(1)*tanh(b1c(2)*saf)   -   b1c(1)*tanh(b1c(2)*sar) )*L-ay*m*(lr-lf)/2;
 
 cvx_begin
-variable Izz
-J2=xx*Izz-yy
-minimize(norm(J2))
+    variable Izz
+    J2=xx*Izz-yy
+    minimize(norm(J2))
 cvx_end
 
 figure
