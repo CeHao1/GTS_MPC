@@ -4,11 +4,14 @@ close all
 % please read the data according to your data form
 %% readdata
 % 1-5,6-8
-% namespace={'e40+10.csv','e60+20.csv','e100+20.csv','e60+40.csv','e70+45.csv' ...
-%     ,'tmp02.csv','pp_he_01.csv','pp_test1.csv'};
-namespace = 'demio_purepursuit.csv'
+namespace={'e40+10.csv','e60+20.csv','e100+20.csv','e60+40.csv','e70+45.csv' ...
+    ,'tmp02.csv','pp_he_01.csv','pp_test1.csv'};
+
+data0=csvread(namespace{7});
 %%
-data0=csvread(namespace);
+% i show you my method, so I mute them at first
+% namespace = 'demio_purepursuit.csv';
+% data0=csvread(namespace);
 paraflag=1;
 
 interval=round(length(data0)/3000);
