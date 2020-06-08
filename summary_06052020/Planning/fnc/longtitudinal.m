@@ -1,4 +1,4 @@
-function Vx=longtitudinal(kap,x_last,ds_ori,pos)
+function Vx=longtitudinal(kap,x_last,ds_ori,pos,params)
 
 % this is the main function to generate longitudinal velocity profile
 
@@ -8,8 +8,8 @@ Vx=ones(1,length(kap))*10;
 
 
 for i=1:50
-    constraints=get_constraints(kap,Vx);
-    Vx_new=get_Vx2(Vx,x_last,constraints,ds_ori);
+    constraints=get_constraints(kap,Vx,params);
+    Vx_new=get_Vx2(Vx,x_last,constraints,ds_ori,params);
     Vx=(Vx+Vx_new)/2;
     sum_Vx(i,:)=Vx;
     sum_t(i)=sum(ds_ori./Vx);

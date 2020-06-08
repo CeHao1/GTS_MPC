@@ -1,9 +1,13 @@
-function Vx_update=get_Vx2(Vx,x_last,constraints,ds_ori)
+function Vx_update=get_Vx2(Vx,x_last,constraints,ds_ori,params)
 % this function is to use forward and backward propagation to calculate Vx
 
+lf = params.lf;
+a11 = params.a11;
+a12 = params.a12;
+m = params.m;
+w_wind = params.w_wind;
 
 st=length(Vx);
-
 % first of all, we need to overlap the track data to avoid edge effect 
 % so, to repeat matrix to three fold
 Vx=repmat(Vx,1,3);
@@ -17,16 +21,12 @@ dpsi=x_last(3,:);
 delta=x_last(6,:);
 
 % calculate lateral force of front tire
-lf=1.0462;
-a11=4800*2;
-a12=7.0;
-m=1060;
+
 alpf=delta-atan2(Vy+lf*dpsi,Vx);
 Fyf=a11*tanh(a12*alpf);
 Dd=(Fyf.*sin(delta))/m-dpsi.*Vy;
 
-w_wind=2.7e-4;
-% w_wind=0;
+
 a_wind=w_wind*Vx.^2;
 
 Np=length(x_last);

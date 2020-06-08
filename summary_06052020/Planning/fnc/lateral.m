@@ -1,30 +1,33 @@
-function [xout,uout]=lateral(pos,edge,x_last,ds_ori)
+function [xout,uout]=lateral(pos,edge,x_last,ds_ori,params)
 
 Ns=5; % states number
 Nc=1; % control number
 Np=length(pos); % prediction number (horizion)
 % pos=[phi;X;Y;s;kap];
 
-gap=0.5;
+gap = params.gap;
+dsteer_limit = params.dsteer_limit;
+steerlimit = params.steerlimit;
+
+
+
 edge_l=edge(5,:)-gap;
 edge_r=-edge(6,:)+gap;
 
-dsteer_limit=50;
-steerlimit=10;
+
 %%
 
 % get matrix
-m=1060;
-Iz=1493.4;
+m = params.m;
+Iz = params.Iz;
 
-% L=2.3100;
-lf=1.0462;
-lr=1.2638;
+lf = params.lf;
+lr = params.lr;
 
-a11=4800*2;
-a12=7.0;
-a21=3720*2;
-a22=10.3;
+a11 = params.a11;
+a12 = params.a12;
+a21 = params.a21;
+a22 = params.a22;
 
 A_combined1=repmat({zeros(Ns,Ns)},Np,Np);
 A_combined2=repmat({zeros(Ns,Nc)},Np,Np-1);

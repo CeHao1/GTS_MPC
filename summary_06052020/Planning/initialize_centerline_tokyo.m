@@ -1,32 +1,27 @@
-function [pos,edge,ds_ori]=initialize_centerline_tokyo(K)
+function [pos,edge,ds_ori]=initialize_centerline_tokyo(K,params)
 if nargin==0
     K=3000;
 end
 
-
-data0=csvread('centerline_run.csv');
-map_data=csvread('centerline_map.csv');
-% s, X, Y, Vx, kap, psi
-
-s=data0(:,1)';
-X=data0(:,2)';
-Y=data0(:,3)';
-psi=data0(:,6)';
-kap=data0(:,5)';
+%% load data
+data0=readtable('centerline_run.csv');
+map_data=readtable('centerline_map.csv');
+s = data0.s';
+X = data0.X';
+Y = data0.Y';
+psi = data0.psi';
+kap = data0.kap;
+Xl = map_data.Xl';
+Yl = map_data.Yl';
+Xr = map_data.Xr';
+Yr = map_data.Yr';
 
 index=(psi>pi/5);
 lp=length(psi);
 index(1:round(lp/2))=0;
 psi(index)=psi(index)-2*pi;
-
-
-Xl=map_data(:,3)';
-Yl=map_data(:,4)';
-Xr=map_data(:,5)';
-Yr=map_data(:,6)';
-
 %%
-trackwidth=3.75; % a safe gap
+trackwidth = params.trackwidth; % a safe gap
 
 wl=ones(1,K)*trackwidth;
 wr=ones(1,K)*trackwidth;
@@ -59,15 +54,6 @@ kap=diff_psi./ds_ori;
 
 pos(5,:)=kap;
 
-%%
-if nargin==0
-    
-figure
-hold on
-plot(s,kap,'b')
-plot(s_intp,kap_intp,'r')
-hold off
 
-end
 
 end
