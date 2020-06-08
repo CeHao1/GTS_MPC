@@ -9,7 +9,9 @@ close all
 namespace = 'pp_he_01.csv';
 namespace = 'demio_purepursuit.csv'
 %%
-data0=csvread(namespace);
+% i show you my method, so I mute them at first
+% namespace = 'demio_purepursuit.csv';
+% data0=csvread(namespace);
 paraflag=1;
 
 interval=round(length(data0)/3000);
