@@ -1,7 +1,16 @@
 close all
 
+<<<<<<< HEAD
+% what data to run
+
+% relatively low speed, about 20%-40% of the maximum speed
+% along the centerline and avoid sharp turnning
+% make sure that the figure alpha to Fy is proportional and linear, or to
+% decelerate the Vx
+=======
 % relatively 40+20*sin(0.01t) on centerline
 
+>>>>>>> 0e4a96ded92db5780a958f04b43ebc0bffc6d0ca
 
 % identify C and Izz, please set Izz in m4 as the result of m3
 
