@@ -35,8 +35,8 @@ classdef car_parameters
                     self.m = 1355.2;           % mass
                     self.a_e = 1.3;          % engine limit
                     self.a_b = -9.5;         % braking limit
-                    self.lf = 1.1621003;     % front length (given by api: 1.69051)
-                    self.lr = 1.823393598;   % rear length (given by api: 2.35349)
+                    self.lf = 1.2928996;     % front length (given by api: 1.69051)
+                    self.lr = 2.028624046;   % rear length (given by api: 2.35349)
                     self.w_wind = 2.7e-4;    % wind coefficient
                     self.Iz = 1493.4;        % moment of inertia
                 case 2148 % roadster
