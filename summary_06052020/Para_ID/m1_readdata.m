@@ -2,6 +2,19 @@ clc;clear ;
 close all
 
 % please read the data according to your data form
+% You may use readtable and please set your data 
+
+% I listed too may states while they are not all necessary
+% the key states are: X,Y,psi,Vx,Vy,dpsi
+% ax,ay
+% steer, throttle,brake
+% wheel load[4], wheel base, mass
+
+% please make sure the all states should be correct in global coordinate or
+% in frenet coordinate. Some states in gym_gts are not consistant with
+% frenet coordinate
+
+addpath('./file')
 %% readdata
 % 1-5,6-8
 namespace={'e40+10.csv','e60+20.csv','e100+20.csv','e60+40.csv','e70+45.csv' ...
@@ -14,6 +27,8 @@ data0=csvread(namespace{7});
 % data0=csvread(namespace);
 paraflag=1;
 
+% this is to retrive the middle part of data, for the start and end have some
+% strange points 
 interval=round(length(data0)/3000);
 if interval==0
     interval=1;
@@ -26,10 +41,10 @@ data=data0(cut:interval:endcut,:);
 V=data(:,1)/3.6;
 ax=data(:,4);
 ay=-data(:,5);   % left is positive
-sr=data(:,6:9);
-sa=data(:,10:13);
-wl=data(:,14:17);
-wa=data(:,18:21);
+sr=data(:,6:9); % slip ratio
+sa=data(:,10:13); % slip angle
+wl=data(:,14:17); % wheel load
+wa=data(:,18:21); % wheel angle
 steer=data(:,22);
 thr=data(:,23);
 brk=data(:,24);
@@ -45,11 +60,11 @@ time=data(:,41)/1000;
 et=data(:,42); %engine torque
 sp=data(:,43); %shift position
 
-if paraflag==1
+if paraflag==1 % you may read other states
 % 'mass','width','length_front','length_rear','wheel_base','max_ps','engine_rev_limit','master_mu'
     para=data(1,44:54);
 end
-%%
+%% 
 srf=(sr(:,1)+sr(:,2))/2;
 srr=(sr(:,3)+sr(:,4))/2;
 saf=(sa(:,1)+sa(:,2))/2;

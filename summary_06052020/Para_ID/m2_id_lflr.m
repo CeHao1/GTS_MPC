@@ -1,4 +1,8 @@
 
+
+% What data shoule we use 
+% On flat ground and static or very-low speed 
+
 % to identify lf and lr
 L=2.3100;
 
