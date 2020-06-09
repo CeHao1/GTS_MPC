@@ -1,7 +1,7 @@
 clc;clear ;
 close all
 
-% hi
+
 % please read the data according to your data form
 % You may use readtable and please set your data 
 
@@ -21,11 +21,11 @@ addpath('./file')
 % namespace={'e40+10.csv','e60+20.csv','e100+20.csv','e60+40.csv','e70+45.csv' ...
 %     ,'tmp02.csv','pp_he_01.csv','pp_test1.csv'};
 namespace = 'pp_he_01.csv';
-namespace = 'demio_purepursuit.csv'
+namespace = {'demio_purepursuit.csv','demio40sine.csv', 'demio40.csv', 'demio10.csv'};
 %%
 % i show you my method, so I mute them at first
-namespace = 'demio_purepursuit.csv';
-data0=csvread(namespace);
+% namespace = 'demio_purepursuit.csv';
+data0=csvread(namespace{4});
 paraflag=1;
 
 % this is to retrive the middle part of data, for the start and end have some

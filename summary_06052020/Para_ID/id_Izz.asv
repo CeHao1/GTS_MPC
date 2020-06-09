@@ -1,0 +1,8 @@
+function Izz = id_Izz(d, params, C)
+    m = params.mass;
+    L = params.wheel_base;
+    xx = 2*d.d2psi/2;
+    yy = C*L*(d.saf-d.sar) - d.ay*m*(paraId.lr-lf)/2;
+
+    
+end

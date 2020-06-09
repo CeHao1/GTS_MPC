@@ -41,14 +41,15 @@ plot_tanh(xr,yr,b1r);
 % b13=tanh_fit2(b03,x3,y3);
 % sv_mat(3,:)=b13;
 % plot_tanh(x3,y3,b13);
-=======
+
+
 x3=(saf+sar)/2; % to test if result is correct
 y3=(Fyf+Fyr)/2; 
 b03=[10000,20]; % initial guess 
 b13=tanh_fit2(b03,x3,y3);
 sv_mat(3,:)=b13;
 plot_tanh(x3,y3,b13);
->>>>>>> 0e4a96ded92db5780a958f04b43ebc0bffc6d0ca
+
 
 
 %%

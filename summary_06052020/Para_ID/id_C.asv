@@ -1,0 +1,17 @@
+function [C,Izz] = id_C(d, params)
+    m = params.mass;
+    
+    cvx_begin
+        variable C
+        J=d.ay*m/2-C*(d.saf+d.sar);
+        minimize(norm(J))
+    cvx_end
+    
+    myfunc = @(C,xdata) C*xdata;
+    xdata = (d.saf+d.sar);
+    ydata = d.ay*m/2;
+    [C1,RESNORM1,RESIDUAL1] = lsqcurvefit(myfunc, 1, xdata, ydata);
+    
+    C
+    C
+end
