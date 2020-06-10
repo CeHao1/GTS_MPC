@@ -30,7 +30,7 @@ K=2000; % choose waypoints
 courseselect=2; %1=demo, 2=tokyo
 iter_all=30; % choose iteration
 % iter_all=15;
-params = car_parameters();
+params = car_parameters(1,'demio_params.mat');
 switch courseselect
     case 1
         [pos,edge,ds_ori]=initialize_centerline_demo(K);

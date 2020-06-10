@@ -19,10 +19,16 @@ paraID.lr=mean(d.wlf/(m*g))*L;
 paraID.C = id_C(d, params,plotflag);
 paraID.Izz = id_Izz(d,params,paraID,plotflag);
 
+
 %% identify tanh model: top speed (eg. planned reference)
 [d,params] = read_data(namespace{1});
 [paraID.a11,paraID.a12,paraID.a21,paraID.a22] = ...
     id_tanh(d, params, paraID, plotflag);
 
-%% add given parameters and export
+
+%% engine braking and acceleration limit
+%% add api given parameters and export
 paraID.m = params.mass; 
+paraID.mu = params.master_mu1;
+
+save('demio_params', '-struct','paraID')

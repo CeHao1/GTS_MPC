@@ -1,5 +1,0 @@
-clear
-clc
-close all
-
-namespace = {'demio_purepursuit.csv','demio40sine.csv', 'demio40.csv', 'demio10.csv'};
