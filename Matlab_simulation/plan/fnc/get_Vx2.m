@@ -1,0 +1,78 @@
+function Vx_update=get_Vx2(Vx,x_last,constraints,ds_ori)
+st=length(Vx);
+
+Vx=repmat(Vx,1,3);
+x_last=repmat(x_last,1,3);
+constraints=repmat(constraints,1,3);
+ds_ori=repmat(ds_ori,1,3);
+
+% Vx=x_last(1,:);
+Vy=x_last(2,:);
+dpsi=x_last(3,:);
+delta=x_last(6,:);
+
+lf=1.0462;
+a11=4800*2;
+a12=7.0;
+m=1060;
+alpf=delta-atan2(Vy+lf*dpsi,Vx);
+Fyf=a11*tanh(a12*alpf);
+Dd=(Fyf.*sin(delta))/m-dpsi.*Vy;
+
+w_wind=0;
+% w_wind=0;
+a_wind=w_wind*Vx.^2;
+
+Np=length(x_last);
+
+%%
+Vmax=constraints(1,:);
+amax=constraints(2,:);
+amin=constraints(3,:);
+% forth
+V1(1)=Vmax(1);
+
+ a_ac=amax-Dd-a_wind;
+ a_dc=amin-Dd-a_wind;
+
+for i=1:Np-1
+    V1(i+1)=min([Vmax(i+1),sqrt(2*a_ac(i)*ds_ori(i)+V1(i)^2)]);
+end
+% V1=abs(V1);
+
+% if Vk>Vk+1, decelerate, but no more than vm
+V2(Np)=Vmax(Np);
+for i= Np:-1:2   
+    V2(i-1)=min([Vmax(i-1),sqrt(-2*a_dc(i)*ds_ori(i-1)+V2(i)^2)]);
+end
+% V2=abs(V2);
+
+Va=min([V1;V2]);
+Vx_update=Va(st+1:2*st);
+%%
+
+
+% figure
+% hold on;
+% plot(Vmax,'b');
+% plot(V1,'r');
+% plot(V2,'g');
+% plot(Va,'k','linewidth',2);
+% xlabel('distance (m)');
+% ylabel('velocity (m/s)');
+% 
+% hold off;
+% axis([1000,2000,20,80])
+% 
+% 
+% figure
+% hold on
+% plot(amax,'r')
+% plot(amin,'b')
+% plot(a_ac,'r*')
+% plot(a_dc,'b*')
+% hold off
+% 
+% close all
+
+end
