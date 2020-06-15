@@ -181,8 +181,8 @@ H=diag(weight);
 
 
 %%
-% cvx_begin 
-cvx_begin quiet
+cvx_begin 
+% cvx_begin quiet
     variable x(Np*Ns+(Np-1)*Nc,1)
     J=x'*H*x;
 %     J=norm(sqrt(weight').*x)
