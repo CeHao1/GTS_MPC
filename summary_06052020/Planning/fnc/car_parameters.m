@@ -22,7 +22,8 @@ classdef car_parameters
         gap = 0.5;          % track side gap
         dsteer_limit = 50;  % limit on derivative of steering angle
         steerlimit = 10;
-        trackwidth = 3.75;     
+%         trackwidth = 3.75; 
+        trackwidth = 7;
     end % end properties
     methods 
         

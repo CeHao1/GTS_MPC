@@ -48,8 +48,8 @@ Yr_intp=intp(Yr,K);
 Xc_intp = intp(Xc, K);
 Yc_intp = intp(Yc,K);
 
-wl = sqrt((Xc_intp - Xl_intp).^2 +(Yc_intp - Yl_intp).^2);
-wr = sqrt((Xc_intp - Xr_intp).^2 +(Yc_intp - Yr_intp).^2);
+% wl = sqrt((Xc_intp - Xl_intp).^2 +(Yc_intp - Yl_intp).^2);
+% wr = sqrt((Xc_intp - Xr_intp).^2 +(Yc_intp - Yr_intp).^2);
 
 
 psi_intp = wrapToPi(psi_intp);
@@ -58,7 +58,7 @@ edge=[Xl_intp;Yl_intp;Xr_intp;Yr_intp;wl;wr];
 
 % pos=[pos,pos(:,1)];
 % pos(1,end)=pos(1,end)-2*pi;
-pos = wrapToPi(pos);
+% pos = wrapToPi(pos);
 pos(4,end)=pos(4,end-1)+sqrt((pos(2,end)-pos(2,end-1))^2+(pos(3,end)-pos(3,end-1))^2);
 
 % edge=[edge,edge(:,1)];

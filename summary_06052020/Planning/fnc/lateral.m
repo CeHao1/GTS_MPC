@@ -13,7 +13,10 @@ steerlimit = params.steerlimit;
 
 edge_l=edge(5,:)-gap;
 edge_r=-edge(6,:)+gap;
-
+figure
+plot(edge_l)
+hold on 
+plot(edge_r)
 %%
 
 % get matrix
