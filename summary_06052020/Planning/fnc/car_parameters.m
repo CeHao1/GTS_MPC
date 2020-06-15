@@ -12,7 +12,7 @@ classdef car_parameters
         a22 = 10.3;         % tanh model constant
         m = 1060;           % mass
         a_e = 1.3;          % engine limit
-        a_b = -9.5;         % braking limit
+        a_b = -8;         % braking limit
         lf = 1.0462;        % front length
         lr = 1.2638;        % rear length
         w_wind = 2.7e-4;    % wind coefficient

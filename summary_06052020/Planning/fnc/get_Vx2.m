@@ -44,7 +44,11 @@ V1(1)=Vmax(1);
  a_dc=amin-Dd-a_wind;
 
 for i=1:Np-1
-    V1(i+1)=min([Vmax(i+1),sqrt(2*a_ac(i)*ds_ori(i)+V1(i)^2)]);
+    if isreal(sqrt(2*a_ac(i)*ds_ori(i)+V1(i)^2))
+        V1(i+1)=min([Vmax(i+1),sqrt(2*a_ac(i)*ds_ori(i)+V1(i)^2)]);
+    else
+        V1(i+1)=Vmax(i+1);
+    end
 end
 % V1=abs(V1);
 
@@ -52,7 +56,10 @@ end
 % if Vk>Vk+1, decelerate, but no more than vm
 V2(Np)=Vmax(Np);
 for i= Np:-1:2   
-    V2(i-1)=min([Vmax(i-1),sqrt(-2*a_dc(i)*ds_ori(i-1)+V2(i)^2)]);
+    if isreal(sqrt(-2*a_dc(i)*ds_ori(i-1)+V2(i)^2))
+        V2(i-1)=min([Vmax(i-1),sqrt(-2*a_dc(i)*ds_ori(i-1)+V2(i)^2)]);
+    else
+        V2(i-1) = Vmax(i-1);
 end
 % V2=abs(V2);
 

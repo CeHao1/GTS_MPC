@@ -14,7 +14,6 @@ steerlimit = params.steerlimit;
 edge_l=edge(5,:)-gap;
 edge_r=-edge(6,:)+gap;
 
-
 %%
 
 % get matrix
@@ -193,6 +192,7 @@ cvx_end
 
 %%
 xout(1,:)=x_last(1,:);
+
 for i=1:Ns
     xout(i+1,:)=x(i:Ns:Np*Ns);
 end
