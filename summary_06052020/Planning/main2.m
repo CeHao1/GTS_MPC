@@ -28,9 +28,9 @@ addpath('./csv');
 
 K=2000; % choose waypoints
 courseselect=2; %1=demo, 2=tokyo
-iter_all=1; % choose iteration
+iter_all=4; % choose iteration
 % iter_all=15;
-params = car_parameters(1,'demio_params.mat');
+params = car_parameters(0,'demio_params.mat');
 switch courseselect
     case 1
         [pos,edge,ds_ori]=initialize_centerline_demo(K);
@@ -82,8 +82,7 @@ for iter=1:iter_all
     sum_out{2,iter}=uout;
     sum_out{3,iter}=kap;
     sum_out{4,iter}=ds_new;
-    toc
-    
+
 end
 sum_out{5,1}=t;
 
@@ -94,4 +93,5 @@ sum_out{5,1}=t;
 name=strcat(name_prefix,num2str(K),'-',num2str(iter_all));
 save(name,'sum_out','pos','edge','iter_all','kap','ds_ori','courseselect')
 msgbox('end')
+
 

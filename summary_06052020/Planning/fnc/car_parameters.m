@@ -1,4 +1,7 @@
-
+%% To use: call car_parameters(loadfile, filename)
+% to use the parameters listed in this file, set loadfile = 0
+% otherwide to load parameters from the mat file saved by the parameterID
+% code, use loadefile = 0 and set the correct filename
 
 classdef car_parameters
     properties

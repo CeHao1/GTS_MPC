@@ -76,7 +76,7 @@ hold off
 reference=[s;CarX;CarY;Vx;kap;psiC1]';
 % reference=[s;CarX;CarY;Vx;psiC1;kap]';
 
-filename2 = 'reference.csv';
+filename2 = 'reference_plan837.csv';
 fid2 = fopen(filename2, 'w');
 for i=1:length(reference)
         fprintf(fid2, '%f,%f,%f,%f,%f,%f', reference(i,:));

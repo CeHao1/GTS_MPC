@@ -1,4 +1,4 @@
-function [C,Izz] = id_C(d, params, plotflag)
+function [C] = id_C(d, params, plotflag)
     m = params.mass;
     
 %     cvx_begin

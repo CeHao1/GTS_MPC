@@ -4,8 +4,8 @@ if nargin==0
 end
 
 %% load data
-data0=readtable('centerline_run.csv');
-map_data=readtable('centerline_map.csv');
+data0=readtable('centerline_run_tokyo.csv');
+map_data=readtable('centerline_map_tokyo.csv');
 s = data0.s';
 X = data0.X';
 Y = data0.Y';
@@ -73,7 +73,7 @@ pos(4,end)=pos(4,end-1)+sqrt((pos(2,end)-pos(2,end-1))^2+(pos(3,end)-pos(3,end-1
 pos=[pos;ds_ori];
 
 
-
+plot(X_intp, Y_intp)
 %%
 
 % pause(0.01)

@@ -23,5 +23,5 @@ function Izz = id_Izz(d, params,paraID,plotflag)
         hold off
         title(strcat('Izz :',num2str(Izz)),'fontsize',15)
         ylabel('M','fontsize',15)
-        
+        legend('data','predicted by model')
 end
