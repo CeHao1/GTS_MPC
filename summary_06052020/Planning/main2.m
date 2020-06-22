@@ -28,7 +28,7 @@ addpath('./csv');
 
 K=2000; % choose waypoints
 courseselect=2; %1=demo, 2=tokyo
-iter_all=4; % choose iteration
+iter_all=1; % choose iteration
 % iter_all=15;
 params = car_parameters(0,'demio_params.mat');
 switch courseselect

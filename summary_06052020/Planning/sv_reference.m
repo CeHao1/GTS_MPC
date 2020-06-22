@@ -10,7 +10,7 @@
 %% X,Y,Xl,Yl,Xr,Yr
 centerline=[pos(2,:);pos(3,:);edge(1:4,:)]';
  
-filename1 = 'centerline1.csv';
+filename1 = 'centerline1_try.csv';
 fid1 = fopen(filename1, 'w');
 for i=1:length(centerline)
         fprintf(fid1, '%f,%f,%f,%f,%f,%f', centerline(i,:));
@@ -76,7 +76,7 @@ hold off
 reference=[s;CarX;CarY;Vx;kap;psiC1]';
 % reference=[s;CarX;CarY;Vx;psiC1;kap]';
 
-filename2 = 'reference_plan837.csv';
+filename2 = 'reference_try.csv';
 fid2 = fopen(filename2, 'w');
 for i=1:length(reference)
         fprintf(fid2, '%f,%f,%f,%f,%f,%f', reference(i,:));

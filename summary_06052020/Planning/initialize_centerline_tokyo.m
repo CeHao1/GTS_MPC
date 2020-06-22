@@ -32,8 +32,8 @@ Yc = map_data.Yc';
 %%
 trackwidth = params.trackwidth; % a safe gap
 
-% wl=ones(1,K)*trackwidth;
-% wr=ones(1,K)*trackwidth;
+wl=ones(1,K)*trackwidth;
+wr=ones(1,K)*trackwidth;
 
 
 s_intp=intp(s,K);
@@ -48,8 +48,8 @@ Yr_intp=intp(Yr,K);
 Xc_intp = intp(Xc, K);
 Yc_intp = intp(Yc,K);
 
-wl = sqrt((Xc_intp - Xl_intp).^2 +(Yc_intp - Yl_intp).^2);
-wr = sqrt((Xc_intp - Xr_intp).^2 +(Yc_intp - Yr_intp).^2);
+% wl = sqrt((Xc_intp - Xl_intp).^2 +(Yc_intp - Yl_intp).^2);
+% wr = sqrt((Xc_intp - Xr_intp).^2 +(Yc_intp - Yr_intp).^2);
 
 
 psi_intp = wrapToPi(psi_intp);

@@ -2,7 +2,8 @@ clear
 clc
 close all
 
-namespace = {'demio_purepursuit.csv','demio40sine.csv', 'demio40.csv', 'demio10.csv', 'demio30.csv'};
+% namespace = {'demio_purepursuit.csv','demio40sine.csv', 'demio40.csv', 'demio10.csv', 'demio30.csv'};
+namespace = {'Vxideal.csv','Vx20.csv', 'Vx40.csv', 'Vx10.csv', 'Vx30.csv'};
 plotflag = 1;
 
 g = 9.81;
@@ -31,4 +32,4 @@ paraID.Izz = id_Izz(d,params,paraID,plotflag);
 paraID.m = params.mass; 
 paraID.mu = params.master_mu1;
 
-save('demio_params', '-struct','paraID')
+save('ttcoup_params', '-struct','paraID')
