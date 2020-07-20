@@ -1,5 +1,8 @@
-function [d,params] = read_data(filename)
+function [d,params] = read_data(filename,ishit)
 
+% data0 = readtable(filename);
+
+    
 data0=csvread(filename);
 paraflag=1;
 
@@ -12,6 +15,7 @@ end
 cut=length(data0)*1/10;
 endcut=length(data0)*9/10;
 data=data0(cut:interval:endcut,:);
+
 
 
 d.V=data(:,1)/3.6;
@@ -73,6 +77,17 @@ rpm2rads=2*pi/60;
 d.erps=d.erpm*rpm2rads;
 d.P=d.erps.*d.et;
 
+
+if nargin == 2
+    d.is_hit = data(:,end);
+    names = fieldnames(d);
+    for n = names
+        e = d.(n{1});
+        if length(e) == length(d.is_hit)
+            d.(n{1}) = e(d.is_hit == 0);
+        end
+    end
+end
 
 
 
