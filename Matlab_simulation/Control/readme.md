@@ -1,4 +1,4 @@
-1. run initialize to load the reference track. The sequence  % s, X, Y, Vx, kap, psi.  
+1. run initialize to load the reference track. The sequence is s, X, Y, Vx, kap, psi.  
    The init states are [X,Y,psi,Vx,Vy,dpsi]  
    
 2. racing_car2_MPC.slx is the simulink, please set the sampling rate as 60Hz in configuration.  
