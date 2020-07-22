@@ -5,7 +5,7 @@ close all
 car = 1;
 if car == 1 %% mazda
     namespace = {'mazda_Vxideal.csv', 'mazda_Vx20.csv', 'mazda_Vx40.csv', 'mazda_Vx10.csv','mazda_Vx30.csv'};
-elseif car == 2
+elseif car == 2 %% ttcoup
     namespace = {'Vxideal.csv','Vx20.csv', 'Vx40.csv', 'Vx10.csv', 'Vx30.csv'};
 end
 % namespace = {'demio_purepursuit.csv','demio40sine.csv', 'demio40.csv', 'demio10.csv', 'demio30.csv'};
@@ -31,8 +31,15 @@ paraID.Izz = id_Izz(d,params,paraID,plotflag);
 [paraID.a11,paraID.a12,paraID.a21,paraID.a22] = ...
     id_tanh(d, params, paraID, plotflag);
 
+%% Acceleration limits
+% figure()
+% plot(d.ay, d.ax,'.')
+ax_max = max(d.ax);
+ax_min = min(d.ax);
 
 %% engine braking and acceleration limit
+
+
 %% add api given parameters and export
 paraID.m = params.mass; 
 paraID.mu = params.master_mu1;
