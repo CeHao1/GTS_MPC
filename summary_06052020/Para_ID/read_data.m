@@ -60,6 +60,9 @@ d.vy=d.velocity(:,3); %
 d.rt2=d.rt(:,2);
 d.av2=d.av(:,2);
 
+
+d.x = d.pos(:,1);
+d.y = -d.pos(:,3);
 %%
 
 d.dt=1/60*d.count_num;
@@ -77,7 +80,14 @@ rpm2rads=2*pi/60;
 d.erps=d.erpm*rpm2rads;
 d.P=d.erps.*d.et;
 
+dx = [diff(d.x); d.x(end)-d.x(1)];
+dy = [diff(d.y); d.y(end)-d.y(1)];
+d.ds = sqrt(dx.^2+dy.^2);
 
+d.kap = calculate_kap(d.x, d.y);
+d.kap(1:20) = d.kap(21);
+d.kap (end-20:end) = d.kap(end-21);
+d.dpsi = d.av(:,2);
 if nargin == 2
     d.is_hit = data(:,end);
     names = fieldnames(d);
