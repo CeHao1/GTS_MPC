@@ -2,7 +2,7 @@ clear
 clc
 close all
 
-car = 3;
+car = 2;
 if car == 1 %% mazda
     namespace = {'mazda_Vxideal.csv', 'mazda_Vx20.csv', 'mazda_Vx40.csv', 'mazda_Vx10.csv','mazda_Vx30.csv'};
 elseif car == 2 %% ttcoup
@@ -27,6 +27,7 @@ paraID.mu = params.master_mu1;
 
 %% identify C and Izz: 20%-40% of max speed
 [d,params] = read_data(namespace{3});
+% [d,params] = read_data(namespace{2});
 paraID.C = id_C(d, params,plotflag);
 paraID.Izz = id_Izz(d,params,paraID,plotflag);
 
@@ -34,8 +35,12 @@ paraID.Izz = id_Izz(d,params,paraID,plotflag);
 %% identify tanh model: top speed (eg. planned reference)
 [d,params] = read_data(namespace{1},1);
 [paraID.a11,paraID.a12,paraID.a21,paraID.a22] = ...
-    id_tanh(d, params, paraID, plotflag);
-
+    id_tanh(d, params, paraID, plotflag,0);
+% if (paraID.a11+paraID.a21)/paraID.m < paraID.mu * g
+%     paraID.a11 = (paraID.mu * g)*paraID.m-paraID.a21;
+%     (paraID.a11+paraID.a21)/paraID.m
+%     [~,~,~,~] = id_tanh(d, params, paraID, 1,paraID.a11);
+% end
 %% Acceleration limits
 % figure()
 % plot(d.ay, d.ax,'.')
@@ -47,6 +52,8 @@ paraID.ax_min = min(d.ax);
 % these are parameters we should tune
 a_e=1.13; % max ax
 a_b=-9.5; % min ax
+a_e = paraID.ax_max;
+a_b = paraID.ax_min;
 % w_wind=2.7e-4;
 w_wind=4e-4;
 

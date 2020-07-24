@@ -17,7 +17,7 @@ function kappa = calculate_kap(x,y)
 %         The coordinates CANNOT overlap.
 % Output:
 %     kappa: radius of curvature for each waypoint (x,y)
-    
+    size(x)
        
     %% perform spline for optimal path
     n = length(x);

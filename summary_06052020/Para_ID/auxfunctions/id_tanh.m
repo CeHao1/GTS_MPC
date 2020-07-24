@@ -1,4 +1,4 @@
-function [a11,a12,a21,a22] = id_tanh(d, p, pID, plotflag)
+function [a11,a12,a21,a22] = id_tanh(d, p, pID, plotflag,changea11)
     Izc = pID.Izz;
     m = p.mass;
     L = p.wheel_base;
@@ -14,6 +14,9 @@ function [a11,a12,a21,a22] = id_tanh(d, p, pID, plotflag)
 
     % front tire
     a_tanh_f = nlinfit(d.saf,Fyf,myfunc,[10000,20]);
+    if changea11 >0 
+        a_tanh_f(1) = changea11;
+    end
     if plotflag
         plot_tanh(d.saf,Fyf,a_tanh_f);
     end
