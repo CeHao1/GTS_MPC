@@ -1,4 +1,4 @@
-function [sys,x0,str,ts,simStateCompliance] = controller_MPC2(t,x,u,flag,reference)
+function [sys,x0,str,ts,simStateCompliance] = controller_MPC2(t,x,u,flag,reference,params)
 
 %ues quadprog instead
 
@@ -127,7 +127,7 @@ switch flag,
   % Outputs %
   %%%%%%%%%%%
   case 3,
-    sys=mdlOutputs(t,x,u,reference);
+    sys=mdlOutputs(t,x,u,reference,params);
 
   %%%%%%%%%%%%%%%%%%%%%%%
   % GetTimeOfNextVarHit %
@@ -233,7 +233,7 @@ sys = [];
 % Return the block outputs.
 %=============================================================================
 %
-function sys=mdlOutputs(t,x,u,reference)
+function sys=mdlOutputs(t,x,u,reference,params)
 
 
 %s, X, Y, Vx, kap, psi (reference)
@@ -292,11 +292,8 @@ dt=1/30; % sample period
 % R=[0.1,500]';
 % Q=[10,0,0,100,20,1]'; 
 
-R=[0.1,1]';
-% R=[0.1,10]';
-% Q=[10,0,0,0.1,30,0.1]'; 
-Q=[10,0.05,0,0.03,5,1]'; 
-% Q=[10,1,0,0.03,100,0.2]'; 
+R = params.R;
+Q = params.Q;
 
 d_steerlimit=100;
 steerlimit=30;
@@ -316,18 +313,24 @@ Vx_all=interp1(reference(:,1),reference(:,4),horizion_s,'spline');
 kap=interp1(reference(:,1),reference(:,5),horizion_s,'spline');   
 
 % get matrix
-m=1060;
-Iz=1493.4;
-% Caf=33240*2;
-% Car=33240*2;
-% L=2.3100;
-lf=1.0462;
-lr=1.2638;
+% m=1060;
+% Iz=1493.4;
+% lf=1.0462;
+% lr=1.2638;
+% 
+% a11=4800*2;
+% a12=7.0;
+% a21=3720*2;
+% a22=10.3;
+m = params.m;
+Iz = params.Izz;
+lf = params.lf;
+lr = params.lr;
+a11 = params.a11*2;
+a12 = params.a12;
+a21 = params.a21*2;
+a22 = params.a22;
 
-a11=4800*2;
-a12=7.0;
-a21=3720*2;
-a22=10.3;
 % MPC sys(1)=a, sys(2)=steer
 
 % A11=-(Caf+Car)/(m*Vx);
@@ -353,7 +356,8 @@ A33=-(Kf*lf^2+Kr*lr^2)/(Iz*Vx);
 B26=Kf/m;
 B36=Kf*lf/Iz;
 
-w_wind=2.7e-4;
+% w_wind=2.7e-4;
+w_wind = params.w_wind;
 a_wind=w_wind*Vx.^2;
 D1=-(Fyf*sin(delta))/m+dpsi*Vy-a_wind;
 D2=(bf+br)/m;

@@ -10,9 +10,107 @@ name2='reference4000-a135.csv';
 name3='reference4000_tokyo.csv';
 name4='reference2000_93.csv';
 
-data0=csvread(name4);
 
-Vx_add=0; 
+%%
+
+% m=1060;
+% Iz=1493.4;
+% Caf=33240*2;
+% Car=33240*2;
+% L=2.3100;
+% lf=1.0462;
+% lr=1.2638;
+% a11=4800*2;
+% a12=7.0;
+% a21=3720*2;
+% a22=10.3;
+% mu=1.35;
+g=9.81;
+dt=1/60;
+
+courseselect=2; %1=demo, 2=tokyo, 3 fuji, 4, brands, 5 361
+carselect = 1; % 1 mazda, 2 ttcoup, 3 demioAZWqaQ
+% iter_all=30; % choose iteration
+iter_all=8;
+
+
+switch courseselect
+    case 1
+        course_prefix='demo-';
+    case 2
+        course_prefix='tokyo-';
+        ref_name = 'reference2000_93.csv';
+    case 3
+        course_prefix='Fuji-';
+    case 4
+        
+        course_prefix='Brands-';
+    case 5
+        
+        course_prefix='361-';
+        
+end
+
+switch carselect
+    case 1
+        param_file = 'mazda_params.mat';
+        car_prefix = 'mazda_';
+    case 2
+        param_file = 'ttcoup_params.mat';
+        car_prefix = 'ttcoup_';
+    case 3
+        param_file = 'demio_params.mat';
+        car_prefix = 'demio_';
+    case 4
+        param_file = 'old.mat';
+        car_prefix = 'oldparams_';
+end
+params = load(param_file);
+try 
+params.a_e = params.ax_max;
+params.a_b = params.ax_min;
+end
+params.g = 9.81;
+
+
+m = params.m;
+Iz = params.Izz;
+Caf=33240*2;
+Car=33240*2;
+L=2.3100;
+lf = params.lf;
+lr = params.lr;
+a11 = params.a11*2;
+a12 = params.a12;
+a21 = params.a21*2;
+a22 = params.a22;
+mu = params.mu;
+% Caf =  params.C*2;
+% Car = params.C*2;
+w_Vx = 1;
+w_Vy = 0; % orig 0.01;
+w_psi_dot = 0;
+w_e_psi = 0.09;
+w_ey = 400;
+w_delta = 0; % orign .05;
+r1 = 0.;
+r2 = 1;
+
+
+Q = [w_Vx,w_Vy,w_psi_dot,w_e_psi,w_ey,w_delta];
+R = [r1,r2];
+
+params.Q = Q';
+params.R = R';
+% params.R=[0.1,1]';
+% % R=[0.1,1]';
+% % Q=[10,0,0,0.1,30,0.1]'; 
+% params.Q=[10,0.05,0,0.03,5,1]'; 
+% Q=[10,1,0,0.03,100,0.2]'; 
+%% main
+data0=csvread(ref_name);
+
+Vx_add=-20; 
 % s, X, Y, Vx, kap, psi
 reference=data0;
 
@@ -26,24 +124,6 @@ init=[reference(1,2:3),reference(1,6),15,0,0];
 % plot(reference(:,1),reference(:,5))
 % figure
 % plot(reference(:,2),reference(:,3))
-%%
-
-m=1060;
-Iz=1493.4;
-Caf=33240*2;
-Car=33240*2;
-L=2.3100;
-lf=1.0462;
-lr=1.2638;
-a11=4800*2;
-a12=7.0;
-a21=3720*2;
-a22=10.3;
-mu=1.35;
-g=9.8;
-dt=1/60;
-
-
 %%
 % 1-frame_count
 % 2-current_lap_time_msec
